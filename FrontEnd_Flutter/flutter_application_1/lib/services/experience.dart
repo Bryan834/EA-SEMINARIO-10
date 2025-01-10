@@ -25,25 +25,19 @@ class ExperienceService {
       print('Data: $data');
       print('Status code: $statusCode');
 
-      // Verificar el código de estado
-      if (statusCode == 201) {
-        print('201');
-        return 201;
-      } else if (statusCode == 400) {
-        print('400');
-        return 400;
-      } else if (statusCode == 500) {
-        print('500');
-        return 500;
-      } else {
-        print('-1');
-        return -1;
-      }
-    } catch (e) {
-      print('Error creating experience: $e');
+      // Considera 200 como éxito
+    if (statusCode == 200 || statusCode == 201) {
+      print('Experiencia creada exitosamente.');
+      return statusCode;
+    } else {
+      print('Error con el status code: $statusCode');
       return -1;
     }
+  } catch (e) {
+    print('Error creating experience: $e');
+    return -1;
   }
+}
 
   // Función para obtener la lista de experiencias
   Future<List<ExperienceModel>> getExperiences() async {
